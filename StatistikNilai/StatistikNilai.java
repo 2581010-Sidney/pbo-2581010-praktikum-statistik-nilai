@@ -19,8 +19,8 @@ public class StatistikNilai {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Integer> daftar = new ArrayList<>();
 
-        System.out.println("==== STATISTIK NILAI KELAS ====");
-        System.out.println("ketik -1 kalau sudah selesai.");
+        System.out.println("===== STATISTIK NILAI KELAS =====");
+        System.out.println("Ketik -1 kalau sudah selesai.");
 
         int nilai = 0;
         do {
@@ -59,6 +59,10 @@ public class StatistikNilai {
 
         double rata = (double) total / daftar.size();
 
+        /*Tertinggi dan terendah sama-sama dimulai dari daftar.get(0), nilai pertama di daftar.
+        * Kalau tertinggi dimulai dari 0 atau terendah dari 100, hasilnya bisa salah
+        * (misalnya smeua nilai 0 atau semua nilai 100). nilai yang benar-benar ada
+        * di daftar pasti valid sebagai pembanding awal.*/
         int tertinggi = daftar.get(0);
         int terendah = daftar.get(0);
         for (int n : daftar) {
@@ -66,6 +70,9 @@ public class StatistikNilai {
             if (n < terendah) terendah = n;
         }
 
+        /*Harus di putaran kedua: rata-rata baru diketahui setelah SEMUA nilai terbabca
+        * dan dijumlahkan. Saat nilai pertama dibaca (misal 85), rata-ratanya belum ada,
+        * jadi tidak ada pembanding. Karena itu perlu loop kedua setelah rata diketahui*/
         int diAtasRata = 0;
         for (int n: daftar){
             if (n > rata) diAtasRata++;
@@ -81,20 +88,20 @@ public class StatistikNilai {
 
         String labelGrade = "ABCDE";
         System.out.println("Nilai tersimpan : " + daftar);
-        System.out.println("Jumlah : " + daftar.size());
-        System.out.println("Rata-rata : " +
+        System.out.println("Jumlah          : " + daftar.size());
+        System.out.println("Rata-rata       : " +
                 String.format(Locale.forLanguageTag("id-ID"), "%.2f", rata));
-        System.out.println("Tertinggi : " + tertinggi);
-        System.out.println("Terendah : " + terendah);
-        System.out.println("Di atas rata2 : "+ diAtasRata + " orang");
+        System.out.println("Tertinggi       : " + tertinggi);
+        System.out.println("Terendah        : " + terendah);
+        System.out.println("Di atas rata2   : "+ diAtasRata + " orang");
 
-        System.out.print("Distribusi :");
+        System.out.print("Distribusi        :");
         for(int i = 0; i< jumlahGrade.length; i++){
             System.out.print(" " + labelGrade.charAt(i) + "=" + jumlahGrade[i]);
         }
         System.out.println();
 
-        System.out.println("Terurut : " + terurut);
-        System.out.println("Urutan asli : " + daftar);
+        System.out.println("Terurut         : " + terurut);
+        System.out.println("Urutan asli     : " + daftar);
     }
 }
