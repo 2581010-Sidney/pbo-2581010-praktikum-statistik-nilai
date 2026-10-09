@@ -24,9 +24,9 @@ public class StatistikNilai {
 
         int nilai = 0;
         do {
-            System.out.println("Nilai ke-" + (daftar.size() + 1) + " : ");
+            System.out.print("Nilai ke-" + (daftar.size() + 1) + " : ");
 
-            if (scanner.hasNextInt()) {
+            if (!scanner.hasNextInt()) {
                 scanner.next();
                 System.out.println(" Ditolak, harus berupa angka");
                 continue;
@@ -39,6 +39,7 @@ public class StatistikNilai {
 
             if (nilai < 0 || nilai > 100) {
                 System.out.println(" Ditolak, harus 0-100");
+                continue;
             }
 
             daftar.add(nilai);
@@ -70,9 +71,9 @@ public class StatistikNilai {
             if (n > rata) diAtasRata++;
         }
 
-        int[] jumlGrade = new int [5];
+        int[] jumlahGrade = new int [5];
         for (int n : daftar){
-            jumlGrade[indexGrade(n)]++;
+            jumlahGrade[indexGrade(n)]++;
         }
 
         ArrayList<Integer> terurut = new ArrayList<>(daftar);
@@ -87,7 +88,13 @@ public class StatistikNilai {
         System.out.println("Terendah : " + terendah);
         System.out.println("Di atas rata2 : "+ diAtasRata + " orang");
 
-        System.out.println("Distribusi :");
-    }
+        System.out.print("Distribusi :");
+        for(int i = 0; i< jumlahGrade.length; i++){
+            System.out.print(" " + labelGrade.charAt(i) + "=" + jumlahGrade[i]);
+        }
+        System.out.println();
 
+        System.out.println("Terurut : " + terurut);
+        System.out.println("Urutan asli : " + daftar);
+    }
 }
